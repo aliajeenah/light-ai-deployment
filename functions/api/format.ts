@@ -76,7 +76,7 @@ app.use('/*', async (c, next) => {
   await next()
 })
 
-app.post('/', async (c) => {
+app.post('/api/format', async (c) => {
   try {
     const body = await c.req.json().catch(() => ({}))
     const { language = 'sv-SE', segments = [] } = body || {}
