@@ -43,7 +43,7 @@ function heuristicFormat(chunks) {
 }
 
 // --- Server formatter call (OpenAI via your server) ---
-async function formatWithOpenAI(segments, language = "sv-SE") {
+async function formatWithOpenAI(segments, language = "en-US") {
   try {
     const resp = await fetch("/api/format", {
       method: "POST",
@@ -135,7 +135,7 @@ export default function App() {
 
     try {
       const rec = new SR();
-      rec.lang = "sv-SE";
+      rec.lang = "en-US";
       rec.interimResults = true;
       rec.continuous = true;
       rec.maxAlternatives = 1;
@@ -242,7 +242,7 @@ export default function App() {
         end: c.endedAt ?? null,
         text: c.text || "",
       }));
-      const md = await formatWithOpenAI(segs, "sv-SE");
+      const md = await formatWithOpenAI(segs, "en-US");
       setNotesMD(md);
       setFmtState("done");
       setTimeout(() => setFmtState("idle"), 1500);
@@ -383,14 +383,14 @@ export default function App() {
           <p className="text-red-300">{permissionError}</p>
         </div>
       )}
-
+{/* sv-SE */}
       {/* Main Split */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Left: Transcript */}
         <div className="bg-neutral-900 border border-neutral-800 rounded-xl">
           <div className="flex items-center justify-between p-4">
             <h3 className="text-lg font-semibold">Live-transkript</h3>
-            <span className="text-xs bg-white/10 px-2 py-1 rounded-full">sv-SE</span>
+            <span className="text-xs bg-white/10 px-2 py-1 rounded-full">en-US</span>
           </div>
           <div className="h-px bg-neutral-800" />
           <div className="p-4">
