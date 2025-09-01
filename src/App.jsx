@@ -2,6 +2,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Mic, Square, Sparkles, Clock, Check, Loader2 } from "lucide-react";
 
 // ---------- Helpers ----------
+// at the top of your App() function body:
+useEffect(() => {
+  const authed = localStorage.getItem("lightai_auth") === "1";
+  if (!authed) {
+    window.location.href = "/login.html";
+  }
+}, []);
+
 function msToClock(ms) {
   const d = new Date(ms);
   return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
