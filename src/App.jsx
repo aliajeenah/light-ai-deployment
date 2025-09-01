@@ -1,13 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Mic, Square, Sparkles, Clock, Check, Loader2 } from "lucide-react";
-// ...
-useEffect(() => {
-  const authed = localStorage.getItem('lightai_auth') === '1';
-  if (!authed) {
-    // Use the actual file because this is an MPA
-    window.location.replace('/login.html');
-  }
-}, []);
 
 
 
