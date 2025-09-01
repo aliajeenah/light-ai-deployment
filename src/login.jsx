@@ -1,4 +1,3 @@
-// src/login.jsx
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -15,7 +14,7 @@ function Login() {
     e.preventDefault();
     if (u === USER && p === PASS) {
       localStorage.setItem("lightai_auth", "1");
-      window.location.href = "/"; // go to your main app (index.html)
+      window.location.href = "/"; // go to your main app
     } else {
       setErr("Fel användarnamn eller lösenord.");
     }
@@ -69,7 +68,7 @@ function Login() {
         </form>
 
         <p className="text-xs text-white/40 mt-4 text-center">
-          Sätt <code>VITE_AUTH_USER</code> och <code>VITE_AUTH_PASS</code> i din <code>.env</code>
+          Sätt <code>VITE_AUTH_USER</code> och <code>VITE_AUTH_PASS</code> i <code>.env</code>
         </p>
       </div>
     </div>
