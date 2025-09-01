@@ -12,20 +12,19 @@ function Login() {
   const PASS = (import.meta.env.VITE_AUTH_PASS || "").trim();
 
   // Base-aware redirects (works on subpaths too)
-  const BASE = (import.meta.env.BASE_URL || "/").replace(/\/+$/, "/");
 
-  // If already logged in, go straight to the app
   useEffect(() => {
-    if (localStorage.getItem("lightai_auth") === "1") {
-      window.location.replace(BASE);
-    }
+    const v = localStorage.getItem('lightai_auth');
+    console.log('auth flag on login:', v);
+    if (v === '1') window.location.replace('/');
   }, []);
+
 
   const submit = (e) => {
     e.preventDefault();
     if (u === USER && p === PASS) {
       localStorage.setItem("lightai_auth", "1");
-      window.location.replace(BASE); // to index.html
+      window.location.replace('/'); // to index.html
     } else {
       setErr("Fel användarnamn eller lösenord.");
     }
