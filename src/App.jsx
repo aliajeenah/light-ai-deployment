@@ -4,7 +4,8 @@ import { Mic, Square, Sparkles, Clock, Check, Loader2 } from "lucide-react";
 useEffect(() => {
   const authed = localStorage.getItem("lightai_auth") === "1";
   if (!authed) {
-    window.location.href = "/login.html";
+    const BASE = (import.meta.env.BASE_URL || "/").replace(/\/+$/, "/");
+    window.location.replace(BASE + "login.html");
   }
 }, []);
 

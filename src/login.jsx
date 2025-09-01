@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
+import React, { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 
 function Login() {
@@ -7,14 +7,25 @@ function Login() {
   const [p, setP] = useState("");
   const [err, setErr] = useState("");
 
+  // Credentials from env (set these in .env and on your host)
   const USER = (import.meta.env.VITE_AUTH_USER || "").trim();
   const PASS = (import.meta.env.VITE_AUTH_PASS || "").trim();
+
+  // Base-aware redirects (works on subpaths too)
+  const BASE = (import.meta.env.BASE_URL || "/").replace(/\/+$/, "/");
+
+  // If already logged in, go straight to the app
+  useEffect(() => {
+    if (localStorage.getItem("lightai_auth") === "1") {
+      window.location.replace(BASE);
+    }
+  }, []);
 
   const submit = (e) => {
     e.preventDefault();
     if (u === USER && p === PASS) {
       localStorage.setItem("lightai_auth", "1");
-      window.location.href = "/"; // go to your main app
+      window.location.replace(BASE); // to index.html
     } else {
       setErr("Fel användarnamn eller lösenord.");
     }
@@ -44,12 +55,13 @@ function Login() {
               placeholder="username"
             />
           </div>
+
           <div>
             <label className="block text-sm mb-1 opacity-80">Lösenord</label>
             <input
+              type="password"
               value={p}
               onChange={(e) => setP(e.target.value)}
-              type="password"
               className="w-full rounded-lg bg-neutral-950 border border-neutral-800 px-3 py-2 outline-none focus:border-neutral-600"
               autoComplete="current-password"
               placeholder="••••••••"
@@ -75,4 +87,4 @@ function Login() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<Login />);
+createRoot(document.getElementById("root")).render(<Login />);
